@@ -2,7 +2,6 @@ package org.p99.scala
 
 object P09 {
 
-  // TODO
   /*
    * Pack consecutive duplicates of list elements into sublists.
    * If a list contains repeated elements they should be placed in separate sublists.
@@ -18,15 +17,11 @@ object P09 {
 
   def pack[A](ls: List[A]): List[List[A]] = {
     def _pack(acc: List[List[A]], subAcc: List[A], l: List[A]): List[List[A]] = {
-      if (l.isEmpty)
-        acc :+ subAcc
-      else if (subAcc == Nil)
-        _pack(acc, List(l.head), l.tail)
-      else if (subAcc.head == l.head)
-        _pack(acc, subAcc :+ l.head, l.tail)
-      else
-        _pack(acc :+ subAcc, Nil, l)
+      if (l.isEmpty) acc :+ subAcc
+      else if (subAcc == Nil) _pack(acc, List(l.head), l.tail)
+      else if (subAcc.head == l.head) _pack(acc, subAcc :+ l.head, l.tail)
+      else _pack(acc :+ subAcc, Nil, l)
     }
-  _pack(Nil, Nil, ls)
+    _pack(Nil, Nil, ls)
   }
 }
